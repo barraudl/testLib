@@ -1,0 +1,54 @@
+#
+#    fty-test - 42ity test library
+#
+#    Copyright (C) 2014 - 2017 Eaton                                        
+#                                                                           
+#    This program is free software; you can redistribute it and/or modify   
+#    it under the terms of the GNU General Public License as published by   
+#    the Free Software Foundation; either version 2 of the License, or      
+#    (at your option) any later version.                                    
+#                                                                           
+#    This program is distributed in the hope that it will be useful,        
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of         
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          
+#    GNU General Public License for more details.                           
+#                                                                           
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.            
+
+Source:         fty-test
+Section:        net
+Priority:       optional
+Maintainer:     fty-test Developers <eatonipcopensource@eaton.com>
+Standards-Version: 3.9.7
+Build-Depends: debhelper (>= 9),
+    pkg-config,
+    asciidoc-base | asciidoc, xmlto,
+    dh-autoreconf
+
+Package: libfty-test1
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: 42ity test library shared library
+ This package contains shared library for fty-test: 42ity test library
+
+Package: libfty-test-dev
+Architecture: any
+Section: libdevel
+Depends:
+    libfty-test1 (= ${binary:Version})
+Description: 42ity test library development tools
+ This package contains development files for fty-test: 42ity test library
+
+
+Package: fty-test-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends:
+    libfty-test1 (= ${binary:Version}),
+    ${misc:Depends}
+Description: 42ity test library debugging symbols
+ This package contains the debugging symbols for fty-test : 42ity test library.
+

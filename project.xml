@@ -1,0 +1,21 @@
+<project
+    name = "fty-test"
+    description = "42ity test library"
+    script = "zproject.gsl"
+    email = "EatonIPCOpenSource@eaton.com"
+    url = "https://42ity.org/"
+    repository = "https://github.com/42ity/libfty-test"
+    license = "GPL-2.0+"
+    header = "ftytest.h"
+    >
+
+    <target name = "debian" />
+    <target name = "redhat" />
+    <target name = "travis" />
+
+    <include filename = "license.xml" />
+    <version major = "1" minor = "0" patch = "0" />
+    <abi current = "1" revision = "0" age = "0" />
+
+    <class name = "fty_test" state = "stable"> Manages discovery requests, provides feedback</class>
+</project>
