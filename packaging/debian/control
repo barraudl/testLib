@@ -21,7 +21,7 @@ Source:         fty-test
 Section:        net
 Priority:       optional
 Maintainer:     fty-test Developers <eatonipcopensource@eaton.com>
-Standards-Version: 3.9.7
+Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
     asciidoc-base | asciidoc, xmlto,
@@ -30,25 +30,28 @@ Build-Depends: debhelper (>= 9),
 Package: libfty-test1
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: 42ity test library shared library
- This package contains shared library for fty-test: 42ity test library
+Description: fty-test shared library
+ This package contains shared library for fty-test:
+ 42ity test library
 
 Package: libfty-test-dev
 Architecture: any
 Section: libdevel
 Depends:
+    ${misc:Depends},
     libfty-test1 (= ${binary:Version})
-Description: 42ity test library development tools
- This package contains development files for fty-test: 42ity test library
+Description: fty-test development tools
+ This package contains development files for fty-test:
+ 42ity test library
 
 
 Package: fty-test-dbg
 Architecture: any
 Section: debug
-Priority: extra
+Priority: optional
 Depends:
     libfty-test1 (= ${binary:Version}),
     ${misc:Depends}
-Description: 42ity test library debugging symbols
- This package contains the debugging symbols for fty-test : 42ity test library.
-
+Description: fty-test debugging symbols
+ This package contains the debugging symbols for fty-test:
+ 42ity test library.

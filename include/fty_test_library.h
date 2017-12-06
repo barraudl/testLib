@@ -56,6 +56,9 @@
 #       define FTY_TEST_EXPORT __declspec(dllimport)
 #   endif
 #   define FTY_TEST_PRIVATE
+#elif defined (__CYGWIN__)
+#   define FTY_TEST_EXPORT
+#   define FTY_TEST_PRIVATE
 #else
 #   define FTY_TEST_EXPORT
 #   if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER

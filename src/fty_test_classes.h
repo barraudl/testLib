@@ -38,6 +38,7 @@
 
 //  Internal API
 
+
 //  *** To avoid double-definitions, only define if building without draft ***
 #ifndef FTY_TEST_BUILD_DRAFT_API
 

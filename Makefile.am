@@ -38,6 +38,7 @@ EXTRA_DIST += \
 endif
 
 EXTRA_DIST += \
+    README.md \
     src/fty_test_classes.h
 
 # NOTE: this "include" syntax is not a "make" but an "autotools" keyword,

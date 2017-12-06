@@ -45,12 +45,12 @@ default|default-Werror|default-with-docs|valgrind)
     if which ccache && ls -la /usr/lib/ccache ; then
         HAVE_CCACHE=yes
     fi
+    mkdir -p "${CCACHE_DIR}" || HAVE_CCACHE=no
 
     if [ "$HAVE_CCACHE" = yes ] && [ -d "$CCACHE_DIR" ]; then
         echo "CCache stats before build:"
         ccache -s || true
     fi
-    mkdir -p "${HOME}/.ccache"
 
     CONFIG_OPTS=()
     COMMON_CFLAGS=""
@@ -193,7 +193,9 @@ default|default-Werror|default-with-docs|valgrind)
     $CI_TIME ./configure --enable-drafts=yes "${CONFIG_OPTS[@]}"
     if [ "$BUILD_TYPE" == "valgrind" ] ; then
         # Build and check this project
-        $CI_TIME make VERBOSE=1 memcheck
+        $CI_TIME make VERBOSE=1 memcheck && exit
+        echo "Re-running failed ($?) memcheck with greater verbosity" >&2
+        $CI_TIME make VERBOSE=1 memcheck-verbose
         exit $?
     fi
     $CI_TIME make VERBOSE=1 all
@@ -220,10 +222,10 @@ default|default-Werror|default-with-docs|valgrind)
     git reset --hard HEAD
     (
         $CI_TIME ./autogen.sh 2> /dev/null
-        $CI_TIME ./configure --enable-drafts=no "${CONFIG_OPTS[@]}" --with-docs=yes
+        $CI_TIME ./configure --enable-drafts=no "${CONFIG_OPTS[@]}"
         $CI_TIME make VERBOSE=1 all || exit $?
         (
-            export DISTCHECK_CONFIGURE_FLAGS="--enable-drafts=no ${CONFIG_OPTS[@]} --with-docs=yes" && \
+            export DISTCHECK_CONFIGURE_FLAGS="--enable-drafts=no ${CONFIG_OPTS[@]}" && \
             $CI_TIME make VERBOSE=1 DISTCHECK_CONFIGURE_FLAGS="$DISTCHECK_CONFIGURE_FLAGS" distcheck || exit $?
         )
     ) || exit 1
