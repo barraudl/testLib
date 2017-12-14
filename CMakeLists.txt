@@ -8,7 +8,7 @@
 ########################################################################
 cmake_minimum_required(VERSION 2.8)
 project(fty_test)
-enable_language(C)
+enable_language(CXX)
 enable_testing()
 
 set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -83,7 +83,7 @@ configure_file("${SOURCE_DIR}/src/platform.h.in" "${SOURCE_DIR}/src/platform.h")
 #so the sources have to be compiled as c++
 if (MSVC)
     enable_language(CXX)
-    file(GLOB sources "${SOURCE_DIR}/src/*.c")
+    file(GLOB sources "${SOURCE_DIR}/src/*.cc")
     set_source_files_properties(
         ${sources}
         PROPERTIES LANGUAGE CXX
@@ -128,7 +128,7 @@ install(FILES ${fty_test_headers} DESTINATION include)
 ########################################################################
 include_directories("${SOURCE_DIR}/src" "${SOURCE_DIR}/include")
 set (fty_test_sources
-    src/fty_test.c
+    src/fty_test.cc
 )
 IF (ENABLE_DRAFTS)
     list (APPEND fty_test_sources
@@ -188,7 +188,7 @@ install(
 ########################################################################
 add_executable(
     fty_test_selftest
-    "${SOURCE_DIR}/src/fty_test_selftest.c"
+    "${SOURCE_DIR}/src/fty_test_selftest.cc"
 )
 target_link_libraries(
     fty_test_selftest
